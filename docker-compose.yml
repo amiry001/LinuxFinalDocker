@@ -1,6 +1,7 @@
 version: '3.9'
 services:
   db:
+  #İşlem 2 :  Mariadb nin parametre değerini aşağıdaki şekilde yapınız.
     image: bitnami/mariadb:latest
     environment:
       - MYSQL_USER=YAM428
@@ -9,7 +10,7 @@ services:
     volumes:
       - db_data:/bitnami
       
-#1-Drupal image name: bitnami/drupal:latest
+#işlem 1-Drupal image name: bitnami/drupal:latest
   drupal:
     image: bitnami/drupal:latest
     ports:
@@ -22,11 +23,11 @@ services:
       - DRUPAL_DATABASE_PASSWORD=03011964
     volumes:
       - drupal_data:/bitnami
-
+#İşlem 3 : Nginx servisine sizin alan adınızı tanımlayarak, sunucunun 80 nolu portundan web hizmeti vermesini sağlayınız
   webserver:
     image: nginx
     ports:
-      - 80:80
+      - 443:80
     environment:
       - VIRTUAL_HOST=amiryfatima.me
     volumes:
@@ -34,7 +35,7 @@ services:
       - ./certs:/etc/nginx/certs:ro
     depends_on:
       - drupal
-
+#İşlem 4: Let's Encrypt hizmetini tanımlayarak web sunucunuzun SSL (443 portundan) hizmet vermesini sağlayın.
   certbot:
     image: certbot
     volumes:
