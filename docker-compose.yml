@@ -8,7 +8,8 @@ services:
       - MYSQL_DATABASE=final
     volumes:
       - db_data:/bitnami
-
+      
+#1-Drupal image name: bitnami/drupal:latest
   drupal:
     image: bitnami/drupal:latest
     ports:
@@ -18,7 +19,7 @@ services:
       - DRUPAL_DATABASE_PORT_NUMBER=3306
       - DRUPAL_DATABASE_NAME=final
       - DRUPAL_DATABASE_USER=YAM428
-      - DRUPAL_DATABASE_PASSWORD=<Sizin Öğrenci Numaranız>
+      - DRUPAL_DATABASE_PASSWORD=03011964
     volumes:
       - drupal_data:/bitnami
 
@@ -27,7 +28,7 @@ services:
     ports:
       - 80:80
     environment:
-      - VIRTUAL_HOST=<amiryfatima>
+      - VIRTUAL_HOST=amiryfatima.me
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./certs:/etc/nginx/certs:ro
@@ -38,7 +39,7 @@ services:
     image: certbot
     volumes:
       - ./certs:/etc/letsencrypt
-    command: certonly --webroot --webroot-path=/etc/letsencrypt --email your_email@example.com --agree-tos --no-eff-email --staging -d amiryfatima
+    command: certonly --webroot --webroot-path=/etc/letsencrypt --email amiryfatima.me --agree-tos --no-eff-email --staging -d amiryfatima.me
 
 volumes:
   db_data:
